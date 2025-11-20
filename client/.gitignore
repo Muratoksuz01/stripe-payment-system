@@ -1,0 +1,7 @@
+node_modules
+.vscode/*
+./paymentmethod-a08b9-firebase-adminsdk-fbsvc-dc546d056f.json
+.env
+
+/src/lib/firebase.ts
+paymentmethod-a08b9-firebase-adminsdk-fbsvc-dc546d056f.json
