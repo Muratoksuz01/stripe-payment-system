@@ -1,6 +1,7 @@
 # Logs
 
-
+invoices/*
+config/paymentmethod-a08b9-firebase-adminsdk-fbsvc-dc546d056f.json
 node_modules
 dist
 dist-ssr

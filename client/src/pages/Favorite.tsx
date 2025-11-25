@@ -1,6 +1,6 @@
 import Container from "../ui/Container";
 import { store } from "../lib/store";
-import FavoriteProduct from "../ui/FavoriteProduct";
+import FavoriteProduct from "../components/FavoriteProduct";
 import { Link } from "react-router-dom";
 
 const Favorite = () => {

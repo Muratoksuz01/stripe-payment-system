@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Container from "./Container";
-import { config } from "../../config";
-import { getData } from "../lib";
-import Title from "./Title";
+import { config } from "../../../config";
+import { getData } from "../../lib";
+import Container from "../../ui/Container";
+import Title from "../../ui/Title";
 import { Link } from "react-router-dom";
-import { CategoryProps } from "../../type";
+import { CategoryProps } from "../../../type";
+
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);

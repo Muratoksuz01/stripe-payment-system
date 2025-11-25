@@ -1,5 +1,6 @@
 import { Router } from "express";
 import Stripe from "stripe";
+
 const router = Router();
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
@@ -82,19 +83,15 @@ router.post("/1create-payment-intent", async (req, res) => {
 });
 
 router.post("/create-payment-intent", async (req, res) => {
-  console.log("1vsvsdvsd")
-  const { paymentMethodId } = req.body;
+  const { paymentMethodId,totalAmt } = req.body;
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
       apiVersion: "2024-06-20",
     });
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 10000, // örnek: 100.00 USD
-    currency: "usd",
+    amount: totalAmt*100,//kurus cınsıne cevirmek gerek
+    currency: "try",
     payment_method: paymentMethodId,
-    confirm: true, // otomatik onay
-    // success_url:"",
-    // cancel_url:"",
-    return_url: "https://your-site.com/checkout/complete",
+    confirm: false, // otomatik onay   
   });
 
   res.json(paymentIntent);

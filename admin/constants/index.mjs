@@ -16,130 +16,120 @@ export const categories = [
   {
     _id: 1001,
     name: "TV & Audio",
-    image: "https://i.ibb.co/kM0FR2h/cat-Tv-Audio.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+    description: "TV ve ses ekipmanlarını kapsayan kategori",
     _base: "tvAndAudio",
   },
   {
     _id: 1002,
     name: "TV Box",
-    image: "https://i.ibb.co/71hR65V/catTvBox.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
+    description: "TV kutuları ve medya oynatıcıları",
     _base: "tvBox",
   },
   {
     _id: 1003,
     name: "Power Tools",
-    image: "https://i.ibb.co/0V0g6Gz/cat-Powertool.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
+    description: "Güç araçları ve iş makineleri",
     _base: "powerTools",
   },
   {
     _id: 1004,
     name: "Headphones",
-    image: "https://i.ibb.co/zST2Xdp/cat-Headphone.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
+    description: "Kulaklıklar ve ses dinleme cihazları",
     _base: "headphones",
   },
   {
     _id: 1005,
     name: "Cell Phones",
-    image: "https://i.ibb.co/jgk59BL/catPhone.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
+    description: "Cep telefonları ve mobil cihazlar",
     _base: "cellPhones",
   },
   {
     _id: 1006,
     name: "Smart Watches",
-    image: "https://i.ibb.co/B4NKfBZ/cat-Smart-Watch.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
+    description: "Akıllı saatler ve giyilebilir teknoloji",
     _base: "smartWatches",
   },
   {
     _id: 1007,
     name: "Game & Video",
-    image: "https://i.ibb.co/4gwLwT2/cat-Gaming.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
+    description: "Oyun konsolları ve video ekipmanları",
     _base: "gameAndVideo",
   },
   {
     _id: 1008,
     name: "Robot Clean",
-    image: "https://i.ibb.co/xjpdQrr/cat-Robot-Clean.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+    description: "Ev temizleme robotları",
     _base: "robotClean",
   },
   {
     _id: 1009,
     name: "Sport Watches",
-    image: "https://i.ibb.co/HdNVLzh/cat-Sport-Watch.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
+    description: "Spor saatleri ve aktiviteler için aksesuarlar",
     _base: "sportWatches",
   },
   {
     _id: 1010,
     name: "Tablets",
-    image: "https://i.ibb.co/qCzTx4F/cat-Tablet.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
+    description: "Tabletler ve taşınabilir cihazlar",
     _base: "tablets",
   },
   {
     _id: 1011,
     name: "Computers & Laptop",
-    image: "https://i.ibb.co/74bZ8PH/cat-Computer.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
+    description: "Bilgisayarlar ve dizüstü bilgisayarlar",
     _base: "computersAndLaptop",
   },
   {
     _id: 1012,
     name: "Cameras & Photos",
-    image: "https://i.ibb.co/SVQVWSS/cat-Camera.webp",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis repellendus dolore.",
+    image: "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
+    description: "Fotoğraf makineleri ve aksesuarları",
     _base: "camerasAndPhotos",
   },
 ];
 
+
 export const highlightsProducts = [
   {
     _id: 3001,
-    name: "New Deals at Best Prices",
-    title: "From $40.00",
-    buttonTitle: "Browse Deals",
-    image: "https://i.ibb.co/G951N5B/highlights-One.webp",
+    name: "En İyi Fiyatlarla Yeni Fırsatlar",
+    title: "40$'dan başlayan fiyatlarla",
+    buttonTitle: "Fırsatlara Göz At",
+    image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg", // çanta ürünü
     _base: "/product",
     color: "#000000",
   },
   {
     _id: 3002,
-    name: "Colorful Redmi  Note 6 Pro",
-    title: "From $40.00",
-    buttonTitle: "Shop Cellphone",
-    image: "https://i.ibb.co/bLRNKGq/highlights-Two.webp",
+    name: "Renkli Redmi Note 6 Pro Alternatifleri",
+    title: "40$'dan başlayan fiyatlarla",
+    buttonTitle: "Telefonları İncele",
+    image: "https://fakestoreapi.com/img/71M0nyB1BHL._AC_SX679_.jpg", // telefon ürünü
     _base: "/category/cellPhones",
     color: "#ffffff",
   },
   {
     _id: 3003,
-    name: "1000 mAh Power Bank",
-    title: "From $40.00",
-    buttonTitle: "Shop Now",
-    image: "https://i.ibb.co/svWYstT/highlights-Three.webp",
+    name: "Taşınabilir Powerbank",
+    title: "40$'dan başlayan fiyatlarla",
+    buttonTitle: "Hemen İncele",
+    image: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg", // elektronik ürün
     _base: "/product",
     color: "#ffffff",
   },
 ];
+
 
 export const blogsData = [
   {

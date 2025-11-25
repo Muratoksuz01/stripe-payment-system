@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { ProductProps } from "../../type";
-import FormattedPrice from "./FormattedPrice";
-import AddToCartBtn from "./AddToCartBtn";
 import { IoClose } from "react-icons/io5";
 import { store } from "../lib/store";
 import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
+import AddToCartBtn from "../components/AddToCartBtn";
+import FormattedPrice from "../components/FormattedPrice";
 
 const CartProduct = ({ product }: { product: ProductProps }) => {
   const { removeFromCart } = store();
@@ -67,7 +67,7 @@ const CartProduct = ({ product }: { product: ProductProps }) => {
             You are saving{" "}
             <span className="text-sm font-semibold text-green-500">
               <FormattedPrice
-                amount={product?.regularPrice - product?.discountedPrice}
+                amount={(product?.regularPrice - product?.discountedPrice)*product?.quantity}
               />
             </span>{" "}
             upon purchase

@@ -3,6 +3,8 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { db } from "./firebase";
 import { ProductProps } from "../../type";
+import axios from "axios";
+import { API_PATH } from "./API_PATH";
 
 interface CartProduct extends ProductProps {
   quantity: number;
@@ -21,21 +23,22 @@ interface StoreType {
   // user
   currentUser: UserType | null;
   isLoading: boolean;
-  getUserInfo: (uid: any) => Promise<void>;
+  getUserInfo: () => Promise<void>;
+  setUser:(user:UserType)=>void,
   // cart
   cartProduct: CartProduct[];
   addToCart: (product: ProductProps) => Promise<void>;
   decreaseQuantity: (productId: number) => void;
   removeFromCart: (productId: number) => void;
   resetCart: () => void;
-  // // favorite
+  // favorite
   favoriteProduct: CartProduct[];
   addToFavorite: (product: ProductProps) => Promise<void>;
   removeFromFavorite: (productId: number) => void;
   resetFavorite: () => void;
 }
 
-const customStorage = {
+const customStorage = {// burada istersen verinin nsıl kayıt edilecgini kontorl edersin belki sifreli kayıt edeceksin 
   getItem: (name: string) => {
     const item = localStorage.getItem(name);
     return item ? JSON.parse(item) : null;
@@ -54,11 +57,20 @@ export const store = create<StoreType>()(
       isLoading: true,
       cartProduct: [],
       favoriteProduct: [],
-
-      getUserInfo: async (uid: any) => {
-        if (!uid) return set({ currentUser: null, isLoading: false });
-
-        const docRef = doc(db, "users", uid);
+      setUser: (user:UserType) => set({ currentUser: user, isLoading: false }),
+      getUserInfo: async () => {
+        console.log("getuserınfo calişti")
+      //  if (!uid) return set({ currentUser: null, isLoading: false });
+        let token=localStorage.getItem("token")
+        if(token){
+          let res=await axios.post(API_PATH.getUser,{token})
+          if(res.data.success){
+            set({ currentUser: res.data.data, isLoading: false })
+          }
+        }else{
+          set({ currentUser: null, isLoading: false })
+        }
+       /*  const docRef = doc(db, "users", uid);
         const docSnap = await getDoc(docRef);
 
         try {
@@ -68,7 +80,7 @@ export const store = create<StoreType>()(
         } catch (error) {
           console.log("getUserInfo error", error);
           set({ currentUser: null, isLoading: false });
-        }
+        } */
       },
       addToCart: (product: ProductProps) => {
         return new Promise<void>((resolve) => {
@@ -135,8 +147,8 @@ export const store = create<StoreType>()(
             return {
               favoriteProduct: isFavorite
                 ? state.favoriteProduct.filter(
-                    (item) => item._id !== product._id
-                  )
+                  (item) => item._id !== product._id
+                )
                 : [...state.favoriteProduct, { ...product }],
             };
           });

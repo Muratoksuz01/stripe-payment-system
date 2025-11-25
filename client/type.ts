@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface HighlightsType {
   _id: number;
   _base: string;
@@ -17,6 +19,9 @@ export interface CategoryProps {
 }
 
 export interface ProductProps {
+  productName: ReactNode;
+  total: number | undefined;
+  unitPrice: number;
   _id: number;
   _base: string;
   reviews: number;
@@ -54,6 +59,7 @@ export interface UserTypes {
 }
 
 export interface OrderTypes {
+  invoiceUrl: string;
   orderItems: [ProductProps];
   paymentId: string;
   paymentMethod: string;

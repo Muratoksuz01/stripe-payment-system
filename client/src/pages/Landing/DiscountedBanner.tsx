@@ -1,6 +1,5 @@
 import React from "react";
-import Container from "./Container";
-import Title from "./Title";
+
 import { Link } from "react-router-dom";
 import {
   brandFive,
@@ -11,7 +10,10 @@ import {
   brandTwo,
   discountImgOne,
   discountImgTwo,
-} from "../assets";
+} from "../../assets";
+import Container from "../../ui/Container";
+import Title from "../../ui/Title";
+
 
 const DiscountedBanner = () => {
   const popularSearchItems = [

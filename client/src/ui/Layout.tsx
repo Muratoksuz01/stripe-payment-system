@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Toaster } from "react-hot-toast";
+import { store } from "../lib/store";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = () => {
+  const {getUserInfo,currentUser} =store()
+  useEffect(()=>{
+    console.log("layout useeffect")
+    getUserInfo()
+  },[])
   return (
     <>
+      {/* <ScrollRestoration /> */}
       <Header />
-      {children}
+      <Outlet />
       {/* <Footer /> */}
       <Toaster
         position="bottom-right"

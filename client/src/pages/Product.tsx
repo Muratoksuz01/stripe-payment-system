@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { config } from "../../config";
 import { ProductProps } from "../../type";
 import { getData } from "../lib";
 import Loading from "../ui/Loading";
 import Container from "../ui/Container";
-import _, { divide } from "lodash";
-import PriceTag from "../ui/PriceTag";
-import { MdOutlineStarOutline } from "react-icons/md";
+import _ from "lodash";
+import { TiStarFullOutline } from "react-icons/ti";
 import { FaRegEye } from "react-icons/fa";
-import FormattedPrice from "../ui/FormattedPrice";
+import FormattedPrice from "../components/FormattedPrice";
 import { IoClose } from "react-icons/io5";
-import AddToCartBtn from "../ui/AddToCartBtn";
-import { productPayment } from "../assets";
-import ProductCard from "../ui/ProductCard";
-import CategoryFilters from "../ui/CategoryFilters";
+import ProductCard from "../components/ProductCard";
+import AddToCartBtn from "../components/AddToCartBtn";
+import PriceTag from "../components/PriceTag";
+import CategoryFilters from "../components/CategoryFilters";
 
 const Product = () => {
   const [productData, setProductData] = useState<ProductProps | null>(null);
@@ -71,10 +70,9 @@ const Product = () => {
                       src={item}
                       alt="img"
                       key={index}
-                      className={`w-24 cursor-pointer opacity-80 hover:opacity-100 duration-300 ${
-                        imgUrl === item &&
+                      className={`w-24 cursor-pointer opacity-80 hover:opacity-100 duration-300 ${imgUrl === item &&
                         "border border-gray-500 rounded-sm opacity-100"
-                      }`}
+                        }`}
                       onClick={() => setImgUrl(item)}
                     />
                   ))}
@@ -93,11 +91,8 @@ const Product = () => {
                   />
                   <div className="flex items-center gap-1">
                     <div className="text-base text-lightText flex items-center">
-                      <MdOutlineStarOutline />
-                      <MdOutlineStarOutline />
-                      <MdOutlineStarOutline />
-                      <MdOutlineStarOutline />
-                      <MdOutlineStarOutline />
+                      <span>{productData?.rating}</span>
+                      <TiStarFullOutline  color="#FFD700"/>
                     </div>
                     <p className="text-base font-semibold">{`(${productData?.reviews} reviews)`}</p>
                   </div>
@@ -137,11 +132,10 @@ const Product = () => {
                     {productData?.colors.map((item) => (
                       <div
                         key={item}
-                        className={`${
-                          item === color
+                        className={`${item === color
                             ? "border border-black p-1 rounded-full"
                             : "border-transparent"
-                        }`}
+                          }`}
                       >
                         <div
                           className="w-10 h-10 rounded-full cursor-pointer"
@@ -170,19 +164,9 @@ const Product = () => {
                 </p>
                 <AddToCartBtn
                   product={productData}
-                  title="Buy now"
                   className="bg-black/80 py-3 text-base text-gray-200 hover:scale-100 hover:text-white duration-200"
                 />
-                <div className="bg-[#f7f7f7] p-5 rounded-md flex flex-col items-center justify-center gap-2">
-                  <img
-                    src={productPayment}
-                    alt="payment"
-                    className="w-auto object-cover"
-                  />
-                  <p className="font-semibold">
-                    Guaranteed safe & secure checkout
-                  </p>
-                </div>
+               
               </div>
             </div>
           ) : (

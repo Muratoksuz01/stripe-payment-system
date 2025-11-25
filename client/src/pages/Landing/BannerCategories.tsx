@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { config } from "../../config";
-import { getData } from "../lib";
+import  { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
-import { CategoryProps } from "../../type";
 import { Link } from "react-router-dom";
-import CustomRightArrow from "./CustomRightArrow";
-import CustomLeftArrow from "./CustomLeftArrow";
+import { config } from "../../../config";
+import { getData } from "../../lib";
+import CustomRightArrow from "../../ui/CustomRightArrow";
+import CustomLeftArrow from "../../ui/CustomLeftArrow";
+import { CategoryProps } from "../../../type";
+
 
 const responsive = {
   superLargeDesktop: {

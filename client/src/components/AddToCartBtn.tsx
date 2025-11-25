@@ -1,4 +1,3 @@
-import { twMerge } from "tailwind-merge";
 import { ProductProps } from "../../type";
 import { store } from "../lib/store";
 import toast from "react-hot-toast";
@@ -6,20 +5,8 @@ import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import PriceTag from "./PriceTag";
 
-const AddToCartBtn = ({
-  className,
-  title,
-  product,
-  showPrice = true,
-}: {
-  className?: string;
-  title?: string;
-  product?: ProductProps;
-  showPrice?: boolean;
-}) => {
-  const [existingProduct, setExistingProduct] = useState<ProductProps | null>(
-    null
-  );
+const AddToCartBtn = ({title,product,showPrice = true,}: {className?: string;title?: string;product?: ProductProps;showPrice?: boolean;}) => {
+  const [existingProduct, setExistingProduct] = useState<ProductProps | null>(null);
   const { addToCart, cartProduct, decreaseQuantity } = store();
 
   useEffect(() => {
@@ -53,38 +40,13 @@ const AddToCartBtn = ({
     }
   };
 
-  const newClassName = twMerge(
-    "bg-[#f7f7f7] uppercase text-xs py-3 text-center rounded-full font-semibold hover:bg-black hover:text-white hover:scale-105 duration-200 cursor-pointer",
-    className
-  );
-
-  const getRegularPrice = () => {
-    if (existingProduct) {
-      if (product) {
-        return product?.regularPrice * existingProduct?.quantity;
-      }
-    } else {
-      return product?.regularPrice;
-    }
-  };
-
-  const getDiscountedPrice = () => {
-    if (existingProduct) {
-      if (product) {
-        return product?.discountedPrice * product?.quantity;
-      }
-    } else {
-      return product?.discountedPrice;
-    }
-  };
-
   return (
     <>
       {showPrice && (
         <div>
           <PriceTag
-            regularPrice={getRegularPrice()}
-            discountedPrice={getDiscountedPrice()}
+            regularPrice={product?.regularPrice}
+            discountedPrice={product?.discountedPrice}
           />
         </div>
       )}
@@ -99,7 +61,7 @@ const AddToCartBtn = ({
           <p className="text-base font-semibold w-10 text-center">
             {existingProduct?.quantity}
           </p>
-          <button
+          <button 
             onClick={handleAddToCart}
             className="bg-[#f7f7f7] text-black p-2 border-[1px] border-gray-200 hover:border-skyText rounded-full text-sm hover:bg-white duration-200 cursor-pointer"
           >
@@ -107,7 +69,7 @@ const AddToCartBtn = ({
           </button>
         </div>
       ) : (
-        <button onClick={handleAddToCart} className={newClassName}>
+        <button onClick={handleAddToCart} className="bg-[#f7f7f7] uppercase text-xs py-3 text-center rounded-full font-semibold hover:bg-black hover:text-white hover:scale-105 duration-200 cursor-pointer">
           {title ? title : "Add to cart"}
         </button>
       )}

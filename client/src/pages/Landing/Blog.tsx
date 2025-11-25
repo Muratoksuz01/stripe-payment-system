@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Container from "./Container";
-import Title from "./Title";
-import { config } from "../../config";
-import { getData } from "../lib";
-import { BlogProps } from "../../type";
+import { config } from "../../../config";
+import { getData } from "../../lib";
+import Container from "../../ui/Container";
+import Title from "../../ui/Title";
+import { BlogProps } from "../../../type";
+
 
 const Blog = () => {
   const [blogsData, setBlogsData] = useState([]);

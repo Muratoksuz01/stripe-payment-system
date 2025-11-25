@@ -1,0 +1,33 @@
++++++++++++++burdan kazanımalar++++++++++
++ firebase auth işlemleri 
++ zuntant 
+
+            cuma 21
+- oncelikle odeme yontemini elden gecirecegiz                                                               hersayfada isetek atıyor bu bu kutupahene ile alakalı imiş globalden kaldırdım ama aynı
+- zuntant nasıl calişir ogren                                                                               tamam
+- categori /id de yanlıs ıd girerse bunu kontrol etmeliyiz                                                  tamam
+- cartProduct.reduce b nasıl bir foks                                                                       tamam
+- product da yıldızlama sistemi var lsitelerken kac yıldızı var goster                                      tamam
+
+            pazatesi 24
+- apı axios apı path vvsw olusmalı                                                                          tamam
+- success sayfasında create işleminde istek atıp verilerle bir pdf olusturamlıyız                           tamam
+- login işlemlerini vs hapsini backende tasınmalı                                                           tamam
+- card sayfasını duzlet                                                                                     tamam
+- kendi stirpe versiona gec                                                                                 tamam
+            sali 25
+- chckout tutar hatası var backende onu duzlet                                                              tamam
+- ardından siparişlerim kısmından ilgili fatura olusturacak ve bunu goruntuleycek                           tamam
+- sistemi yavass yavas kendi sistemie cevir fazlalıkları at 
+
+- product sayfasına karsılastır iconu var bunu calişir hale getir 
+- kdv sistemi de gelsin 
+- faturanın css ile oyna tasarımı kotu 
+- AI konularına bir bak canli destek kısmı guzel olur 
+- yuz ile login işlemi 
+- edit profile kısmı yok 
+- add adress kısmı yok 
+- bu databaseyi gercek bir veritabanına koyarız 
+- belki bir admin sayfası 
+- odeme sayfasında once bir adress bilgierini almalıyız 
+- gerekli gorduuguz yerleri degistirecegiz meselsa serach barda metin varsa diger sayfalara gecis yapsak bile acık kalıyuor bunu guncellemeliyiz 

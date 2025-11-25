@@ -1,6 +1,5 @@
 import { MdOutlineStarOutline } from "react-icons/md";
 import { ProductProps } from "../../type";
-import AddToCartBtn from "./AddToCartBtn";
 import { useState } from "react";
 import {
   Button,
@@ -10,9 +9,12 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import FormattedPrice from "./FormattedPrice";
-import ProductCardSideNav from "./ProductCardSideNav";
 import { useNavigate } from "react-router-dom";
+import { TiStarFullOutline } from "react-icons/ti";
+import AddToCartBtn from "../components/AddToCartBtn";
+import FormattedPrice from "../components/FormattedPrice";
+import ProductCardSideNav from "../ui/ProductCardSideNav";
+
 interface Props {
   item: ProductProps;
   setSearchText?: any;
@@ -53,16 +55,11 @@ const ProductCard = ({ item, setSearchText }: Props) => {
         <ProductCardSideNav product={item} />
       </div>
       <div className="flex flex-col gap-2 px-2 pb-2">
-        <h3 className="text-xs uppercase font-semibold text-lightText">
-          {item?.overView}
-        </h3>
+       
         <h2 className="text-lg font-bold line-clamp-2">{item?.name}</h2>
         <div className="text-base text-lightText flex items-center">
-          <MdOutlineStarOutline />
-          <MdOutlineStarOutline />
-          <MdOutlineStarOutline />
-          <MdOutlineStarOutline />
-          <MdOutlineStarOutline />
+          <TiStarFullOutline />
+          {`${item?.rating} (${item?.reviews})`}
         </div>
         <AddToCartBtn product={item} />
       </div>

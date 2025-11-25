@@ -89,33 +89,7 @@ const CheckoutFormInner = () => {
   };
 
   return (
-//   <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-//   <label className="block mb-4 text-gray-700 font-semibold">
-//     Card details
-//     <div className="mt-2 border border-gray-300 rounded-md p-3">
-//       <CardElement
-//         options={{
-//           style: {
-//             base: {
-//               fontSize: "20px",
-//               color: "#424770",
-//               "::placeholder": { color: "#red" },
-//             },
-//             invalid: { color: "#f56565" },
-//           },
-//         }}
-//       />
-//     </div>
-//   </label>
 
-//   <button
-//     type="submit"
-//     disabled={!stripe}
-//     className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-//   >
-//     Pay
-//   </button>
-// </form>
 <form onSubmit={handleSubmit1} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg space-y-4">
   <div>
     <label className="block text-gray-700 font-semibold mb-1">Card number</label>

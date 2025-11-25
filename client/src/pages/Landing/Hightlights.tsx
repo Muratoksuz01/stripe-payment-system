@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Container from "./Container";
-import { getData } from "../lib";
-import { config } from "../../config";
-import { HighlightsType } from "../../type";
+
 import { Link } from "react-router-dom";
+import { config } from "../../../config";
+import { getData } from "../../lib";
+import Container from "../../ui/Container";
+import { HighlightsType } from "../../../type";
 
 const Hightlights = () => {
   const [highlightsData, setHighlightsData] = useState([]);

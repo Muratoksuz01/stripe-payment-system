@@ -4,21 +4,27 @@ import { config } from "../../config";
 import { getData } from "../lib";
 import Loading from "../ui/Loading";
 import Container from "../ui/Container";
-import CategoryFilters from "../ui/CategoryFilters";
-import ProductCard from "../ui/ProductCard";
+import CategoryFilters from "../components/CategoryFilters";
+import ProductCard from "../components/ProductCard";
 import { ProductProps } from "../../type";
 
 const Category = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState("")
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/categories/${id}`;
+      const endpoint = `${config?.baseUrl}/categories/${id}`
       try {
         setLoading(true);
         const data = await getData(endpoint);
-        setProducts(data);
+        if (data.error) {
+          setError(data.error)
+        } else {
+          setProducts(data.data)
+          setError("")
+        }
       } catch (error) {
         console.error("Error fetching data", error);
       } finally {
@@ -43,14 +49,20 @@ const Category = () => {
           <h2 className="text-4xl text-center font-semibold mb-5">
             {formatId(id!)}
           </h2>
+
           <div className="flex items-start gap-10">
             <CategoryFilters id={id} />
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {products?.map((item: ProductProps) => (
-                <ProductCard item={item} key={item?._id} />
-              ))}
-            </div>
+            {error ? (
+              <div>galiba aradıgnız ketegr arun yok</div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                {products?.map((item: ProductProps) => (
+                  <ProductCard item={item} key={item?._id} />
+                ))}
+              </div>
+            )}
           </div>
+
         </Container>
       )}
     </div>

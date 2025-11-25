@@ -1,5 +1,3 @@
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "./firebase";
 import axios from "axios";
 const UPLOAD_PRESET = import.meta.env.VITE_UPLOAD_PRESET
 const CLOUD_NAME = import.meta.env.VITE_CLOUD_NAME

@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { config } from "../../config";
 import { getData } from "../lib";
 import { ProductProps } from "../../type";
-import ProductCard from "./ProductCard";
 import ReactPaginate from "react-paginate";
+import ProductCard from "../components/ProductCard";
 
 interface ItemsProps {
   currentItems: ProductProps[];

@@ -3,8 +3,8 @@ import { ProductProps } from "../../type";
 import { store } from "../lib/store";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import AddToCartBtn from "./AddToCartBtn";
-import FormattedPrice from "./FormattedPrice";
+import AddToCartBtn from "../components/AddToCartBtn";
+import FormattedPrice from "../components/FormattedPrice";
 
 const FavoriteProduct = ({ product }: { product: ProductProps }) => {
   const { removeFromFavorite } = store();

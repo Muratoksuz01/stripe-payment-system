@@ -1,6 +1,7 @@
-import { homeBanner } from "../assets";
-import Container from "./Container";
-import LinkButton from "./LinkButton";
+import { homeBanner } from "../../assets";
+import Container from "../../ui/Container";
+import LinkButton from "../../ui/LinkButton";
+
 
 const HomeBanner = () => {
   return (

@@ -15,8 +15,8 @@ import Container from "./Container";
 import { config } from "../../config";
 import { getData } from "../lib";
 import { CategoryProps, ProductProps } from "../../type";
-import ProductCard from "./ProductCard";
 import { store } from "../lib/store";
+import ProductCard from "../components/ProductCard";
 
 const bottomNavigation = [
   { title: "Home", link: "/" },
@@ -77,6 +77,7 @@ const Header = () => {
         <div className="hidden md:inline-flex max-w-3xl w-full relative">
           <input
             type="text"
+            disabled={true}
             onChange={(e) => setSearchText(e.target.value)}
             value={searchText}
             placeholder="Search products..."
