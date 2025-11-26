@@ -14,8 +14,8 @@ const __dirname = path.dirname(__filename);
 
 const router = Router();
 router.post("/create-invoice", async (req, res) => {
-  const { userName, userEmail, userAddress, items, orderId, invoiceNo, paymentMethod, paymentId } = req.body;
-
+  const { userName, userEmail, userAddress, items, invoiceNo, paymentMethod, paymentId } = req.body;
+  let orderId=Math.floor(Math.random() * 1000000);
   if (!userEmail) {
     return res.status(400).json(createResponse(false, null, null, "userEmail gereklidir"));
   }
@@ -101,7 +101,6 @@ router.get("/getInvoice", async (req, res) => {
 
     // Güvenlik için sadece invoice klasörü içinden izin verelim
     const invoicePath = path.join(process.cwd(), "invoices", path.basename(pdfUrl));
-    console.log(invoicePath)
     // Dosya var mı kontrol et
     if (!fs.existsSync(invoicePath)) {
         return res.status(404).json({ success: false, message: "Dosya bulunamadı" });
@@ -118,6 +117,7 @@ async function generatePdf(userName, userEmail, userAddress, items, orderId, inv
   const invoiceDate = new Date().toISOString().split("T")[0];
   const totalPrice = items.reduce((acc, item) => acc + item.total, 0);
   const html = renderInvoiceHTML({ userName, userEmail, userAddress, items, orderId, invoiceNo, invoiceDate, totalPrice, });
+
   const uniqueId = uuidv4();
   const pdfName = `invoice_${uniqueId}.pdf`;
   const pdfPath = path.join(__dirname, "../invoices", pdfName);
@@ -140,7 +140,16 @@ async function generatePdf(userName, userEmail, userAddress, items, orderId, inv
 
 
 function renderInvoiceHTML(data) {
-  const { userName, userEmail, userAddress, items, invoiceNo, invoiceDate, orderId, totalPrice } = data;
+  const { 
+    userName, 
+    userEmail, 
+    userAddress, 
+    items, 
+    invoiceNo, 
+    invoiceDate, 
+    orderId, 
+    totalPrice 
+  } = data;
 
   const itemsRows = items
     .map(
@@ -151,7 +160,7 @@ function renderInvoiceHTML(data) {
         <td>${item.sku || "-"}</td>
         <td>${item.quantity}</td>
         <td>${item.unitPrice} TL</td>
-        <td>${item.unitPrice * item.quantity} TL</td>
+        <td>${(item.unitPrice * item.quantity).toFixed(2)} TL</td>
       </tr>
     `
     )
@@ -162,36 +171,48 @@ function renderInvoiceHTML(data) {
     <head>
       <meta charset="utf-8" />
       <style>
-        body { font-family: Arial, sans-serif; font-size: 12px; }
-        .inv-box { width: 98%; border: 1px solid #ddd; padding: 20px; }
-        .row { display: flex; justify-content: space-between; }
-        .head { font-size: 16px; font-weight: bold; margin-bottom: 10px; }
+        body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; }
+        .inv-box { width: 100%; max-width: 800px; margin: auto; border: 1px solid #ddd; padding: 20px; }
+        .row { display: flex; justify-content: space-between; align-items: center; }
+        .head { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+        .info-box { display: flex; justify-content: space-between; margin-top: 15px; }
+        .info { border: 1px solid #ddd; padding: 10px; width: 48%; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        td, th { border: 1px solid #444; padding: 6px; }
+        td, th { border: 1px solid #444; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
         .right { text-align: right; }
       </style>
     </head>
     <body>
       <div class="inv-box">
         <div class="row">
-          <div>
-            <div class="head">e-Arşiv Fatura</div>
-            <div><strong>Belge No:</strong> ${invoiceNo}</div>
-            <div><strong>Fatura Tarihi:</strong> ${invoiceDate}</div>
-            <div><strong>Sipariş No:</strong> ${orderId}</div>
-          </div>
+          <div class="head">e-Arşiv Fatura</div>
           <div>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPD6sCJx4r-gw3RbGpfn_6EhIaovnUeaxPSuR6lsGscr3ELC8Xj9gXOTNdEkGsMEw8lK7nRWcrSYUcppFE5g_yCpJDSStQHBrAsYXjy1dU&s=10" width="90"/>
           </div>
         </div>
 
-        <hr/>
+        <div class="row" style="margin-top: 10px;">
+          <div>
+            <strong>Belge No:</strong> ${invoiceNo}<br/>
+            <strong>Fatura Tarihi:</strong> ${invoiceDate}<br/>
+            <strong>Fatura Tipi:</strong> Satış Faturası<br/>
+            <strong>Sipariş No:</strong> ${orderId}
+          </div>
+        </div>
 
-        <div>
-          <strong>Alıcı:</strong><br/>
-          ${userName}<br/>
-          ${userEmail}<br/>
-          ${userAddress || ""}
+        <div class="info-box">
+          <div class="info">
+            <strong>Gönderici:</strong><br/>
+            eTicaret Şirketi<br/>
+            info@eticaret.com<br/>
+            İstanbul, Türkiye
+          </div>
+          <div class="info">
+            <strong>Alıcı:</strong><br/>
+            ${userName} | ${userEmail}<br/>
+            ${userAddress || ""}
+          </div>
         </div>
 
         <table>
@@ -216,3 +237,4 @@ function renderInvoiceHTML(data) {
   </html>
   `;
 }
+

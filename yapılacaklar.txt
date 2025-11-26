@@ -1,33 +1,65 @@
 +++++++++++++burdan kazanımalar++++++++++
 + firebase auth işlemleri 
 + zuntant 
++ rate limit,
+           
+                           persembe 27 
+- edit sayfası back işleri 
+- zod shema gecelim 
+- rate limit                                                                                                tamam
+- caching 
+- AOP ,IcO
+- autoFac
+- register da avatar silindi databseden de sil ve bu işlemi kaldır projeden yerine first +last bas harflerini koy backende bekler yani 
+- tum productlar gelmesin asagı indirdikce gelesin veriler 
+- hugging face Aı ,destek sayfsı bir sekilde yap 
+-  adres girme ve edit adress yapılabilri tabi bunalr icin databaseyi guncellemek lazım 
+- product sayfasına karsılastır iconu var bunu calişir hale getir 
+- bu databaseyi gercek bir veritabanına koyarız 
+- belki bir magaza giris sayfası sayfası 
 
-            cuma 21
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        cuma 21
 - oncelikle odeme yontemini elden gecirecegiz                                                               hersayfada isetek atıyor bu bu kutupahene ile alakalı imiş globalden kaldırdım ama aynı
 - zuntant nasıl calişir ogren                                                                               tamam
 - categori /id de yanlıs ıd girerse bunu kontrol etmeliyiz                                                  tamam
 - cartProduct.reduce b nasıl bir foks                                                                       tamam
 - product da yıldızlama sistemi var lsitelerken kac yıldızı var goster                                      tamam
 
-            pazatesi 24
+                                        pazatesi 24
 - apı axios apı path vvsw olusmalı                                                                          tamam
 - success sayfasında create işleminde istek atıp verilerle bir pdf olusturamlıyız                           tamam
 - login işlemlerini vs hapsini backende tasınmalı                                                           tamam
 - card sayfasını duzlet                                                                                     tamam
 - kendi stirpe versiona gec                                                                                 tamam
-            sali 25
+                                        sali 25
 - chckout tutar hatası var backende onu duzlet                                                              tamam
 - ardından siparişlerim kısmından ilgili fatura olusturacak ve bunu goruntuleycek                           tamam
-- sistemi yavass yavas kendi sistemie cevir fazlalıkları at 
+- sistemi yavass yavas kendi sistemie cevir fazlalıkları at                                                 tamam
+                                        carsamba 26
+- gerekli gorduuguz yerleri degistirecegiz meselsa serach barda metin varsa diger                           tamam
+    sayfalara gecis yapsak bile acık kalıyuor bunu guncellemeliyiz 
+- odeme sayfasında once bir adress bilgierini almalıyız                                                     tamam
+- add adress kısmı yok                                                                                      tamam
+- faturaya indirma btn ekle                                                                                 tamam
+- fazla dosyalardan kurtul                                                                                  biraz 
+- faturanın css ile oyna tasarımı kotu                                                                      tamam
+- edit profile kısmı yok                                                                                    frontenti bitti
+- AI konularına bir bak canli destek kısmı guzel olur  arastır bunu                                         hugging face dan mini AI al ve destek sayfası ekle mesaj yaz gondere gelen cevapı goster websocekt gerek yok 
 
-- product sayfasına karsılastır iconu var bunu calişir hale getir 
-- kdv sistemi de gelsin 
-- faturanın css ile oyna tasarımı kotu 
-- AI konularına bir bak canli destek kısmı guzel olur 
-- yuz ile login işlemi 
-- edit profile kısmı yok 
-- add adress kısmı yok 
-- bu databaseyi gercek bir veritabanına koyarız 
-- belki bir admin sayfası 
-- odeme sayfasında once bir adress bilgierini almalıyız 
-- gerekli gorduuguz yerleri degistirecegiz meselsa serach barda metin varsa diger sayfalara gecis yapsak bile acık kalıyuor bunu guncellemeliyiz 
+
+
+

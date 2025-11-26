@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
-import { FaQuestionCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+
 import { store } from "../lib/store";
-import CartProduct from "../ui/CartProduct";
-import CheckoutBtn from "../ui/CheckoutBtn";
-import Container from "../ui/Container";
-import FormattedPrice from "../ui/FormattedPrice";
-import Product from "./Product";
-import CheckoutForm1 from "../CheckoutForm1";
 
 
-import { loadStripe } from "@stripe/stripe-js";
 const Cart = () => {
   const { addToCart, decreaseQuantity, removeFromCart } = store()
   const [totalAmt, setTotalAmt] = useState({ regular: 0, discounted: 0 });

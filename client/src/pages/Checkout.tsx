@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { store } from '../lib/store';
-import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from '../ui/PaymentForm';
-import { Elements } from '@stripe/react-stripe-js';
 import Cart from './Cart';
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 function Checkout() {
   const { cartProduct, currentUser } = store();
@@ -22,7 +19,6 @@ function Checkout() {
   }, [cartProduct]);
 
   return (
-    <Elements stripe={stripePromise}>
       <div className="grid grid-cols-3 gap-6 w-full p-4">
 
         {/* Sol taraf - Sepet */}
@@ -49,12 +45,11 @@ function Checkout() {
 
             {/* Ödeme Formu */}
 
-            <PaymentForm totalAmt={totalAmt} />
+            {/* <PaymentForm totalAmt={totalAmt} /> */}
 
           </div>
         </div>
       </div>
-    </Elements>
 
   )
 }

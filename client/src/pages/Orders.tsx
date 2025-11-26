@@ -1,14 +1,7 @@
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from "@headlessui/react";
-import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { OrderTypes, ProductProps } from "../../type";
-import { db } from "../lib/firebase";
 import { store } from "../lib/store";
 import Container from "../ui/Container";
 import Loading from "../ui/Loading";
@@ -242,23 +235,36 @@ const Orders = () => {
           </Link>
         </div>
       )}
-      <Dialog
-        open={openInvoice}
-        onClose={() => setOpenInvoice(false)}
-        className="relative z-50"
-      >
-        <div className="fixed inset-0 bg-black/50" aria-hidden="true" />
+    <Dialog
+  open={openInvoice}
+  onClose={() => setOpenInvoice(false)}
+  className="relative z-50"
+>
+  <div className="fixed inset-0 bg-black/50" aria-hidden="true" />
 
-        <div className="fixed inset-0 flex items-center justify-center p-4">
-          <Dialog.Panel className="bg-white p-2 rounded-md w-full max-w-4xl h-[80vh]">
-            <iframe
-              src={pdfUrl}
-              className="w-full h-full"
-              title="invoice"
-            ></iframe>
-          </Dialog.Panel>
-        </div>
-      </Dialog>
+  <div className="fixed inset-0 flex items-center justify-center p-4">
+    <Dialog.Panel className="bg-white p-4 rounded-md w-full max-w-4xl h-[80vh] flex flex-col">
+      
+      <iframe
+        src={pdfUrl}
+        className="w-full flex-1 rounded-md border"
+        title="invoice"
+      ></iframe>
+
+      <div className="mt-4 flex justify-center">
+        <a
+          href={pdfUrl}
+          download="fatura.pdf"
+          className="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 transition text-sm font-medium"
+        >
+          Dosyayı İndir
+        </a>
+      </div>
+
+    </Dialog.Panel>
+  </div>
+</Dialog>
+
 
     </Container>
   );

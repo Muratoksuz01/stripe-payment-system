@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { MdPhotoLibrary } from "react-icons/md";
-import { uploadImage } from "../lib/upload";
 import Login from "./Login";
 import axios from "axios";
 import { API_PATH } from "../lib/API_PATH";
@@ -68,7 +67,6 @@ export default function Registration() {
 
 };
 
-if (login) return <Login  setLogin={setLogin} />;
 
 return (
   <div className="bg-gray-950 rounded-lg">
@@ -100,24 +98,7 @@ return (
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="block w-full rounded-md bg-white/5 py-1.5 px-4 mt-2 outline-none ring-1 ring-white/10" />
           </div>
 
-          <div className="col-span-full">
-            <Label title="Avatar" />
-            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white/25 px-6 py-4">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 border border-gray-600 rounded-full p-1">
-                  {avatar.url ? <img src={avatar.url} className="w-full h-full rounded-full object-cover" /> : <MdPhotoLibrary className="mx-auto h-full w-full text-gray-500" />}
-                </div>
-
-                <div className="mt-4 flex items-center text-sm text-gray-400">
-                  <label htmlFor="file-upload">
-                    <span className="cursor-pointer bg-gray-900 px-2 py-1 rounded-md font-semibold">Upload</span>
-                    <input id="file-upload" type="file" onChange={handleAvatar} className="sr-only" />
-                  </label>
-                  <p className="pl-1">or drag and drop</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
 
@@ -130,7 +111,7 @@ return (
 
     <p className="text-sm text-gray-400 text-center py-10">
       Already have an account?
-      <button onClick={() => setLogin(true)} className="text-gray-200 font-semibold underline ml-1">Login</button>
+      <button onClick={() => window.location.href="/login"} className="text-gray-200 font-semibold underline ml-1">Login</button>
     </p>
   </div>
 );

@@ -1,13 +1,22 @@
 import express from "express";
-const app = express();
+import rateLimit from "express-rate-limit";
 import "dotenv/config";
 import cors from "cors";
 import { fileURLToPath } from "url";
 import path from "path";
 import { readdirSync } from "fs";
+const app = express();
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 15 dk max 10 istek izin ver 
+  max: 100,
+  message: "Too many requests",
+});
+app.use(limiter);
 
 const port = process.env.PORT || 8000;
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);

@@ -6,7 +6,7 @@ import { store } from "../lib/store";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 
 const Layout = () => {
-  const {getUserInfo,currentUser} =store()
+  const {getUserInfo} =store()
   useEffect(()=>{
     console.log("layout useeffect")
     getUserInfo()

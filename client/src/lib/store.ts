@@ -1,7 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { db } from "./firebase";
 import { ProductProps } from "../../type";
 import axios from "axios";
 import { API_PATH } from "./API_PATH";
@@ -70,17 +69,6 @@ export const store = create<StoreType>()(
         }else{
           set({ currentUser: null, isLoading: false })
         }
-       /*  const docRef = doc(db, "users", uid);
-        const docSnap = await getDoc(docRef);
-
-        try {
-          if (docSnap.exists()) {
-            set({ currentUser: docSnap.data() as UserType, isLoading: false });
-          }
-        } catch (error) {
-          console.log("getUserInfo error", error);
-          set({ currentUser: null, isLoading: false });
-        } */
       },
       addToCart: (product: ProductProps) => {
         return new Promise<void>((resolve) => {

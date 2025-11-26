@@ -6,11 +6,11 @@ import Label from "../ui/Label";
 import Loading from "../ui/Loading";
 
 
-const Login = ({setLogin}:{setLogin:any}) => {
+const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
-  const [email, setEmail] = useState("test@test.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("capalyx@mailinator.com");
+  const [password, setPassword] = useState("Pa$$w0rd!");
   const {getUserInfo} =store()
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -89,7 +89,7 @@ const Login = ({setLogin}:{setLogin:any}) => {
       <p className="text-sm leading-6 text-gray-400 text-center -mt-2 py-10">
         Does not have an Account{" "}
         <button
-          onClick={()=>setLogin(false)}
+          onClick={()=>window.location.href="/register"}
           className="text-gray-200 font-semibold underline underline-offset-2 decoration-[1px] hover:text-white duration-200"
         >
           Register

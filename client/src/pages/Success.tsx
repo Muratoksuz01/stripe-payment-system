@@ -3,8 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { store } from "../lib/store";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { db } from "../lib/firebase";
 import Container from "../ui/Container";
 import Loading from "../ui/Loading";
 import axios from "axios";
@@ -22,7 +20,6 @@ const Success = () => {
       const saveOrder = async () => {
         try {
           setLoading(true);
-           const orderRef = doc(db, "orders", currentUser?.email!);
         
           let items = cartProduct.map(item => ({
             _id:item._id,
@@ -38,7 +35,6 @@ const Success = () => {
             "userName": `${currentUser?.firstName} ${currentUser?.lastName}`,
             "userEmail": `${currentUser?.email}`,
             "userAddress": "fake adresss",
-              orderId: orderRef.id, // BURASI ÖNEMLİ
             "invoiceNo": "fake INV-20251234",
             "items": items,
             paymentMethod: "stripe",

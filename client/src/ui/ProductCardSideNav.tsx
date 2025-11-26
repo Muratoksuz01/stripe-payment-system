@@ -37,9 +37,9 @@ const ProductCardSideNav = ({ product }: { product?: ProductProps }) => {
       >
         {existingProduct ? <FaStar /> : <FaRegStar />}
       </span>
-      <span className="w-11 h-11 inline-flex text-black text-lg items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
+      {/* <span className="w-11 h-11 inline-flex text-black text-lg items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
         <LuArrowLeftRight />
-      </span>
+      </span> */}
       {/* <span className="w-11 h-11 inline-flex text-black text-lg items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
         <FaRegEye />
       </span> */}
