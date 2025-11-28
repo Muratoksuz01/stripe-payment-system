@@ -5,6 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { API_PATH } from "../lib/API_PATH";
+import Loading from "../ui/Loading";
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
@@ -14,8 +15,9 @@ function Odeme() {
     const [totalAmt, setTotalAmt] = useState({ regular: 0, discounted: 0 });
     const [cartnumber, setCartnumber] = useState(false)
     const [csv, setCsv] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [cartDate, setCartDate] = useState(false)
-    let cargoPrice = totalAmt.discounted > 500 ? 0 : 50
+    let cargoPrice = totalAmt.discounted > 1000 ? 0 : 50
     const navigate = useNavigate();
     const stripe = useStripe();
     const elements = useElements();
@@ -60,7 +62,7 @@ function Odeme() {
         e.preventDefault();
         console.log("first")
         if (!stripe || !elements) return;
-
+        setLoading(true)
         const card = elements.getElement(CardNumberElement);
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: "card",
@@ -84,11 +86,14 @@ function Odeme() {
 
         console.log("odeme sonrasi paymentInstance", paymentIntent)
         if (paymentIntent && paymentIntent.status === "succeeded") {
+            setLoading(false)
             window.location.href = `/success?payment_intent=${paymentIntent.id}`;
         };
         if (confirmError) console.log(confirmError);
+        setLoading(false)
     }
     return (
+        
         <div className="w-full flex justify-center py-10">
             <div className="w-full max-w-6xl px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
 
@@ -217,6 +222,7 @@ function Odeme() {
                 </div>
 
             </div>
+            {loading && <Loading />}
         </div>
 
     );

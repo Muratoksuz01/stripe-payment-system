@@ -26,10 +26,10 @@ const Pagination = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/products`;
+      const endpoint = `${config?.baseUrl}/products?page=1&limit=6`;
       try {
         const data = await getData(endpoint);
-        setProducts(data);
+        setProducts(data.data);
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -56,7 +56,7 @@ const Pagination = () => {
 
   return (
     <>
-      <Items currentItems={currentItems} />
+      <Items currentItems={products} />
       <div className="flex flex-col md:flex-row justify-center md:justify-between items-center">
         <ReactPaginate
           nextLabel=""

@@ -3,26 +3,21 @@
 + zuntant 
 + rate limit,
            
-                           persembe 27 
-- edit sayfası back işleri 
-- zod shema gecelim 
-- rate limit                                                                                                tamam
-- caching 
-- AOP ,IcO
-- autoFac
-- register da avatar silindi databseden de sil ve bu işlemi kaldır projeden yerine first +last bas harflerini koy backende bekler yani 
-- tum productlar gelmesin asagı indirdikce gelesin veriler 
+   
+
+
+
+                cuma 28
 - hugging face Aı ,destek sayfsı bir sekilde yap 
+
+
+
+
+
 -  adres girme ve edit adress yapılabilri tabi bunalr icin databaseyi guncellemek lazım 
-- product sayfasına karsılastır iconu var bunu calişir hale getir 
+- product sayfasına karsılastır iconu var bunu ca   lişir hale getir 
 - bu databaseyi gercek bir veritabanına koyarız 
 - belki bir magaza giris sayfası sayfası 
-
-
-
-
-
-
 
 
 
@@ -59,7 +54,15 @@
 - faturanın css ile oyna tasarımı kotu                                                                      tamam
 - edit profile kısmı yok                                                                                    frontenti bitti
 - AI konularına bir bak canli destek kısmı guzel olur  arastır bunu                                         hugging face dan mini AI al ve destek sayfası ekle mesaj yaz gondere gelen cevapı goster websocekt gerek yok 
-
-
+                                    persembe 27 
+- rate limit                                                                                                tamam
+- edit sayfası back işleri                                                                                  tamam
+- zod shema gecelim                                                                                         tamam
+- caching                                                                                                   redis dusundum ama server i kurmak istemedim 
+- AOP                                                                                                       nodejs js kullanılmıor 
+- IcO                                                                                                       burada yanlıs anlaşılma var boyle ibr sey yok 
+- autoFac                                                                                                   nodejs de kullanılmıyor 
+- register da avatar sil bas harfleri koy                                                                   tamam 
+- tum productlar gelmesin asagı indirdikce gelesin veriler                                                  tamam
 
 

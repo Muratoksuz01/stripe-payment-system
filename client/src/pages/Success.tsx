@@ -1,13 +1,14 @@
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { store } from "../lib/store";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import Container from "../ui/Container";
 import Loading from "../ui/Loading";
 import axios from "axios";
 
 const Success = () => {
+
   const { currentUser, cartProduct, resetCart } = store();
   const location = useLocation();
   const pi = new URLSearchParams(location.search).get("payment_intent");
@@ -20,10 +21,10 @@ const Success = () => {
       const saveOrder = async () => {
         try {
           setLoading(true);
-        
+
           let items = cartProduct.map(item => ({
-            _id:item._id,
-            images:item.images,
+            _id: item._id,
+            images: item.images,
             productName: item.name,
             quantity: item.quantity,
             unitPrice: item.discountedPrice ?? item.regularPrice,
@@ -38,22 +39,23 @@ const Success = () => {
             "invoiceNo": "fake INV-20251234",
             "items": items,
             paymentMethod: "stripe",
-             paymentId: pi,
+            paymentId: pi,
           }
           )
 
           toast.success("Payment accepted successfully & order saved!");
           resetCart();
+
         } catch (error) {
           console.log(error)
           toast.error("Error saving order data");
         } finally {
           setLoading(false);
-          }
+        }
       };
       saveOrder();
     }
-  }, [pi, navigate, currentUser, cartProduct]);
+  }, []);
 
   return (
     <Container>

@@ -10,9 +10,7 @@ import { store } from "../lib/store";
 function UserInfo() {
   const [activeComponent, setActiveComponent] = useState("details");
   const {currentUser} =store()
-  const onUpdate =() => {
-
-  }
+ 
   return (
     <Container className=" text-white">
       <div className="relative isolate overflow-hidden text-black py-5 shadow-2xl sm:rounded-3xl sm:px-16">
@@ -61,8 +59,8 @@ function UserInfo() {
 
         {/* ALTTA GÖRECEĞİMİZ COMPONENT */}
         <div className=" px-4">
-          {activeComponent === "details" && <UserDetails currentUser={currentUser} onUpdate={onUpdate}/>}
-          {activeComponent === "changePass" && <ChangePassword />}
+          {activeComponent === "details" && <UserDetails currentUser={currentUser} />}
+          {activeComponent === "changePass" && <ChangePassword currentUser={currentUser}/>}
           {activeComponent === "address" && <AddressList />}
         </div>
 

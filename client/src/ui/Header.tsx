@@ -18,13 +18,12 @@ import { CategoryProps, ProductProps } from "../../type";
 import { store } from "../lib/store";
 import ProductCard from "../components/ProductCard";
 import UserDropdown from "./UserDropdown";
+import SearchBar from "./SearchBar";
 
 const bottomNavigation = [
   { title: "Home", link: "/" },
   { title: "Shop", link: "/product" },
   { title: "Cart", link: "/cart" },
-  { title: "Orders", link: "/orders" },
-  { title: "My Account", link: "/profile" },
   { title: "Blog", link: "/blog" },
 ];
 
@@ -75,65 +74,13 @@ const Header = () => {
   }, [searchText]);
 
   return (
-    <div className="w-full bg-whiteText md:sticky md:top-0 z-50">
-      <div className="max-w-screen-xl mx-auto h-20 flex items-center justify-between px-4 lg:px-0">
+    <div className="w-full bg-whiteText md:sticky md:top-0 z-50 ">
+      <div className="max-w-screen-xl mx-auto h-20 flex items-center justify-between px-4 ">
         {/* Logo */}
         <Link to={"/"}>
           <img src={logo} alt="logo" className="w-44" />
         </Link>
-        {/* SearchBar */}
-        <div
-          className="hidden md:inline-flex max-w-3xl w-full relative"
-          onBlur={(e) => {
-            // Sadece component dışına çıkılırsa kapat
-            if (!e.currentTarget.contains(e.relatedTarget)) {
-              setIsOpen(false);
-            }
-          }}
-        >
-          <input
-            type="text"
-            onChange={(e) => setSearchText(e.target.value)}
-            value={searchText}
-            placeholder="Search products..."
-            onFocus={() => setIsOpen(true)}
-            className="w-full flex-1 rounded-full text-gray-900 text-lg 
-        placeholder:text-base shadow-sm ring-1 ring-gray-300 
-        focus:ring-darkText sm:text-sm px-4 py-2"
-          />
-
-          {searchText && isOpen && (
-            <div
-              className="absolute left-0 top-14 w-full max-h-[500px] 
-        px-10 py-5 bg-white z-20 overflow-y-scroll text-black 
-        shadow-lg scrollbar-hide"
-              tabIndex={-1}   // blur çalışması için
-              onMouseDown={(e) => e.preventDefault()}
-            // Prevent: sonuçlara tıklarken input blur olmasın
-            >
-              {filteredProducts.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
-                  {filteredProducts?.map((item: ProductProps) => (
-                    <ProductCard
-                      key={item?._id}
-                      item={item}
-                      setSearchText={setSearchText}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="py-10 bg-gray-50 w-full flex items-center justify-center border border-gray-600 rounded-md">
-                  <p className="text-xl font-normal">
-                    Nothing matches:{" "}
-                    <span className="underline text-red-500 font-semibold">
-                      {searchText}
-                    </span>
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
+       <SearchBar/>
         {/*Menu kısmı */}
         <div className="flex gap-2">
           <UserDropdown currentUser={currentUser} logout={logout} />

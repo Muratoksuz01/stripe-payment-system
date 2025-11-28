@@ -12,7 +12,6 @@ const router = Router();
 router.post("/api/register", upload.single("avatar"), async (req, res) => {
     try {
         const { firstName, lastName, email, password } = req.body;
-        const avatarFile = req.file;
 
         if (!firstName || !lastName || !email || !password) {
             return res
@@ -28,11 +27,7 @@ router.post("/api/register", upload.single("avatar"), async (req, res) => {
                 .json(createResponse(false, null, "", "Bu email zaten kayıtlı"));
         }
 
-        // avatar yükleme
-        let avatarUrl = null;
-        if (avatarFile) {
-            avatarUrl = await uploadImage(avatarFile);   // burası önemli
-        }
+      
 
         // yeni kullanıcı
         const newUser = {
@@ -40,7 +35,7 @@ router.post("/api/register", upload.single("avatar"), async (req, res) => {
             lastName,
             email,
             password,        // ileride hash eklersin
-            avatar: avatarUrl,
+            avatar: "",
         };
 
         const docRef = await usersRef.add(newUser);
@@ -143,6 +138,53 @@ router.post("/api/getUser", async (req, res) => {
     return res.json(createResponse(false, null, "", "Token doğrulama hatası"));
   }
 });
+router.post("/api/editUyelikBilgileri", async (req, res) => {
+  const { id, firstName, lastName, email } = req.body;
 
+  if (!id) return res.json(createResponse(false, "User ID eksik"));
 
+  try {
+    const userRef = db.collection("users").doc(id);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      return res.json(createResponse(false, "Kullanıcı bulunamadı"));
+    }
+
+    await userRef.update({ firstName, lastName, email });
+    res.json(createResponse(true, "Kullanıcı bilgileri güncellendi"));
+  } catch (err) {
+    console.error(err);
+    res.json(createResponse(false, "Güncelleme sırasında hata oluştu"));
+  }
+});
+
+// Şifre güncelleme
+router.post("/api/editPassword", async (req, res) => {
+  const { id, oldPass, newPass } = req.body;
+
+  if (!id) return res.json(createResponse(false, "User ID eksik"));
+  if (!oldPass || !newPass) return res.json(createResponse(false, "Eski veya yeni şifre eksik"));
+
+  try {
+    const userRef = db.collection("users").doc(id);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      return res.json(createResponse(false, "Kullanıcı bulunamadı"));
+    }
+
+    const userData = userDoc.data();
+
+    if (userData.password !== oldPass) {
+      return res.json(createResponse(false, "Eski şifre yanlış"));
+    }
+
+    await userRef.update({ password: newPass });
+    res.json(createResponse(true, "Şifre güncellendi"));
+  } catch (err) {
+    console.error(err);
+    res.json(createResponse(false, "Şifre güncelleme sırasında hata oluştu"));
+  }
+});
 export default router;

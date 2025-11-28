@@ -15,12 +15,19 @@ const __dirname = path.dirname(__filename);
 const router = Router();
 router.post("/create-invoice", async (req, res) => {
   const { userName, userEmail, userAddress, items, invoiceNo, paymentMethod, paymentId } = req.body;
-  let orderId=Math.floor(Math.random() * 1000000);
+  let orderId = Math.floor(Math.random() * 1000000);
   if (!userEmail) {
     return res.status(400).json(createResponse(false, null, null, "userEmail gereklidir"));
   }
-
   try {
+    const querySnapshot = await db.collection("orders")
+      .where("userEmail", "==", userEmail)
+      .where("paymentId", "==", paymentId)
+      .get();
+    
+    if (!querySnapshot.empty) {
+      return res.status(400).json(createResponse(false, null, null, "Bu email ile zaten bir sipariş var"));
+    }
     const pdfUrl = await generatePdf(userName, userEmail, userAddress, items, orderId, invoiceNo);
 
     // Admin SDK ile referans oluştur
@@ -32,7 +39,7 @@ router.post("/create-invoice", async (req, res) => {
       paymentMethod,
       orderItems: items,
       invoiceUrl: pdfUrl,
-    //  createdAt: admin.firestore.FieldValue.serverTimestamp(), // en iyisi!
+      //  createdAt: admin.firestore.FieldValue.serverTimestamp(), // en iyisi!
     };
 
     // Admin SDK transaction
@@ -74,7 +81,7 @@ router.get("/getInvoices", async (req, res) => {
     const userDoc = await db.collection("orders").doc(email).get();
 
     if (!userDoc.exists) {
-      return res.status(404).json({ success: false, error: "User orders not found" });
+      return res.status(200).json({ success: false, error: "User orders not found" });
     }
 
     const ordersArray = userDoc.data().orders || [];
@@ -93,21 +100,21 @@ router.get("/getInvoices", async (req, res) => {
 });
 
 router.get("/getInvoice", async (req, res) => {
-    const { pdfUrl } = req.query;
+  const { pdfUrl } = req.query;
 
-    if (!pdfUrl) {
-        return res.status(400).json({ success: false, message: "pdfUrl eksik" });
-    }
+  if (!pdfUrl) {
+    return res.status(400).json({ success: false, message: "pdfUrl eksik" });
+  }
 
-    // Güvenlik için sadece invoice klasörü içinden izin verelim
-    const invoicePath = path.join(process.cwd(), "invoices", path.basename(pdfUrl));
-    // Dosya var mı kontrol et
-    if (!fs.existsSync(invoicePath)) {
-        return res.status(404).json({ success: false, message: "Dosya bulunamadı" });
-    }
+  // Güvenlik için sadece invoice klasörü içinden izin verelim
+  const invoicePath = path.join(process.cwd(), "invoices", path.basename(pdfUrl));
+  // Dosya var mı kontrol et
+  if (!fs.existsSync(invoicePath)) {
+    return res.status(404).json({ success: false, message: "Dosya bulunamadı" });
+  }
 
-    // PDF dosyasını gönder
-    res.sendFile(invoicePath);
+  // PDF dosyasını gönder
+  res.sendFile(invoicePath);
 });
 
 
@@ -140,15 +147,15 @@ async function generatePdf(userName, userEmail, userAddress, items, orderId, inv
 
 
 function renderInvoiceHTML(data) {
-  const { 
-    userName, 
-    userEmail, 
-    userAddress, 
-    items, 
-    invoiceNo, 
-    invoiceDate, 
-    orderId, 
-    totalPrice 
+  const {
+    userName,
+    userEmail,
+    userAddress,
+    items,
+    invoiceNo,
+    invoiceDate,
+    orderId,
+    totalPrice
   } = data;
 
   const itemsRows = items

@@ -3,19 +3,18 @@ import { Fragment } from "react";
 import { FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-function UserDropdown({ currentUser, logout }:any) {
+function UserDropdown({ currentUser, logout }: any) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       {/* Trigger */}
       <Menu.Button className="cursor-pointer">
         {currentUser ? (
-          <img
-            src={currentUser.avatar}
-            className="w-10 h-10 rounded-full object-cover"
-            alt="user"
-          />
+          <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center font-semibold text-gray-800">
+            {currentUser.firstName?.[0]?.toUpperCase()}
+            {currentUser.lastName?.[0]?.toUpperCase()}
+          </div>
         ) : (
-          <FiUser className=" hover:text-skyText duration-200" />
+          <FiUser className="hover:text-skyText duration-200 mr-1 text-2xl" />
         )}
       </Menu.Button>
 
@@ -42,6 +41,16 @@ function UserDropdown({ currentUser, logout }:any) {
                   </Link>
                 )}
               </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    to="/orders"
+                    className={`${active ? "bg-gray-100" : ""} px-3 py-2 block`}
+                  >
+                    Siparişlerim
+                  </Link>
+                )}
+              </Menu.Item>
 
               <Menu.Item>
                 {({ active }) => (
@@ -53,6 +62,7 @@ function UserDropdown({ currentUser, logout }:any) {
                   </button>
                 )}
               </Menu.Item>
+              
             </>
           ) : (
             <>

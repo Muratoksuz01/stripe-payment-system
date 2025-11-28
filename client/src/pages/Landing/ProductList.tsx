@@ -14,7 +14,6 @@ const ProductList = () => {
         </div>
         <div className="w-full h-[1px] bg-gray-200 mt-2" />
       </div>
-      {/* Pagination */}
       <Pagination />
     </Container>
   );

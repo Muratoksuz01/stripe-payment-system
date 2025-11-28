@@ -117,7 +117,7 @@ export const highlightsProducts = [
     buttonTitle: "Telefonları İncele",
     image: "https://fakestoreapi.com/img/71M0nyB1BHL._AC_SX679_.jpg", // telefon ürünü
     _base: "/category/cellPhones",
-    color: "#ffffff",
+    color: "#000000",
   },
   {
     _id: 3003,
@@ -126,7 +126,7 @@ export const highlightsProducts = [
     buttonTitle: "Hemen İncele",
     image: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg", // elektronik ürün
     _base: "/product",
-    color: "#ffffff",
+    color: "#000000",
   },
 ];
 

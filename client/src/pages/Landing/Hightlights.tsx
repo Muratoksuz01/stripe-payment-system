@@ -26,7 +26,7 @@ const Hightlights = () => {
       {highlightsData.map((item: HighlightsType) => (
         <div
           key={item?._id}
-          className="relative h-60 rounded-lg shadow-md cursor-pointer overflow-hidden group"
+          className="relative h-60 rounded-lg shadow-md cursor-pointer overflow-hidden group "
         >
           <div
             className="absolute inset-0 bg-cover bg-center rounded-lg transition-transform duration-300 group-hover:scale-110"

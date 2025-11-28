@@ -4,6 +4,11 @@ import axios from "axios";
 import { store } from "../lib/store";
 import Label from "../ui/Label";
 import Loading from "../ui/Loading";
+import { useForm } from "react-hook-form"
+import { LoginShema } from "../models/user";
+import { zodResolver } from "@hookform/resolvers/zod"
+import z from "zod"
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
@@ -11,31 +16,65 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [email, setEmail] = useState("capalyx@mailinator.com");
   const [password, setPassword] = useState("Pa$$w0rd!");
-  const {getUserInfo} =store()
+  const { getUserInfo } = store()
+  const navigate=useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<z.infer<typeof LoginShema>>({
+    resolver: zodResolver(LoginShema),
+    defaultValues: {
+      email: "capalyx@mailinator.com",
+      password: "Pa$$w0rd!"
+    }
+  })
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrMsg("");
+
+  // const handleLogin = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setErrMsg("");
+  //   setLoading(true);
+
+  //   try {
+  //     const response = await axios.post(API_PATH.login, { email, password });
+  //     const data =response.data;
+  //     console.log("Login successful:", data);
+  //     localStorage.setItem("token",response.data.data.token)
+  //     getUserInfo()
+  //     // Gerekirse token veya kullanıcı bilgisini localStorage / context ile kaydet
+  //   } catch (err: any) {
+  //     setErrMsg(err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+ 
+ 
+  const submit = async (data: any) => {
+    console.log("SUCCESS", data);
     setLoading(true);
-
     try {
-      const response = await axios.post(API_PATH.login, { email, password });
-      const data =response.data;
-      console.log("Login successful:", data);
-      localStorage.setItem("token",response.data.data.token)
+      const response = await axios.post(API_PATH.login, {
+        email: data.email,
+        password: data.password
+      });
+      console.log("Login successful:", response.data);
+      localStorage.setItem("token", response.data.data.token)
       getUserInfo()
+      navigate("/")
       // Gerekirse token veya kullanıcı bilgisini localStorage / context ile kaydet
     } catch (err: any) {
       setErrMsg(err.message);
     } finally {
       setLoading(false);
     }
-  };
-
+  }
   return (
     <div className="bg-gray-950 rounded-lg">
       <form
-        onSubmit={handleLogin}
+        onSubmit={handleSubmit(submit)}
         className="max-w-5xl mx-auto pt-10 px-10 lg:px-0 text-white"
       >
         <div className="border-b border-b-white/10 pb-5">
@@ -52,22 +91,27 @@ const Login = () => {
             <div className="sm:col-span-3">
               <Label title="Email address" htmlFor="email" />
               <input
+                // value={email}
+                // onChange={(e) => setEmail(e.target.value)}
+                //name="email"
                 type="text"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 className="block w-full rounded-md border-0 bg-white/5 py-1.5 px-4 outline-none text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-skyText sm:text-sm sm:leading-6 mt-2"
+                {...register("email")}
               />
+              {errors && <span className="error-message">{errors.email?.message}</span>}
+
             </div>
             <div className="sm:col-span-3">
               <Label title="Password" htmlFor="password" />
               <input
+                // name="password"
+                // value={password}
+                // onChange={(e) => setPassword(e.target.value)}
                 type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 className="block w-full rounded-md border-0 bg-white/5 py-1.5 px-4 outline-none text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-skyText sm:text-sm sm:leading-6 mt-2"
+                {...register("password")}
               />
+              {errors && <span className="error-message">{errors.password?.message}</span>}
             </div>
           </div>
         </div>
@@ -89,7 +133,7 @@ const Login = () => {
       <p className="text-sm leading-6 text-gray-400 text-center -mt-2 py-10">
         Does not have an Account{" "}
         <button
-          onClick={()=>window.location.href="/register"}
+          onClick={() => window.location.href = "/register"}
           className="text-gray-200 font-semibold underline underline-offset-2 decoration-[1px] hover:text-white duration-200"
         >
           Register
@@ -101,3 +145,5 @@ const Login = () => {
 };
 
 export default Login;
+
+

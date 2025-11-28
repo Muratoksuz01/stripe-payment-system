@@ -17,7 +17,12 @@ import CategoryFilters from "../components/CategoryFilters";
 
 const Product = () => {
   const [productData, setProductData] = useState<ProductProps | null>(null);
+
+  // infinite scroll states
   const [allProducts, setAllProducts] = useState<ProductProps[]>([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
   const [loading, setLoading] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [color, setColor] = useState("");
@@ -25,18 +30,24 @@ const Product = () => {
 
   const endpoint = id
     ? `${config?.baseUrl}/products/${id}`
-    : `${config?.baseUrl}/products/`;
+    : `${config?.baseUrl}/products?page=${page}&limit=20`;
 
+  // ürün detay veya liste alma
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
+
         const data = await getData(endpoint);
+
         if (id) {
+          // product detail
           setProductData(data);
           setAllProducts([]);
         } else {
-          setAllProducts(data);
+          // product list
+          if (data.length < 20) setHasMore(false);
+          setAllProducts((prev) => [...prev, ...data.data]);
           setProductData(null);
         }
       } catch (error) {
@@ -45,22 +56,44 @@ const Product = () => {
         setLoading(false);
       }
     };
+
     fetchData();
   }, [id, endpoint]);
 
+  // detay sayfası için varsayılan image-color
   useEffect(() => {
     if (productData) {
-      setImgUrl(productData?.images[0]);
-      setColor(productData?.colors[0]);
+      setImgUrl(productData.images[0]);
+      setColor(productData.colors[0]);
     }
   }, [productData]);
 
+  // infinite scroll event
+  useEffect(() => {
+    if (id) return; // detay sayfasında scroll çalışmasın
+
+    const onScroll = () => {
+      if (!hasMore || loading) return;
+
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 300
+      ) {
+        setPage((prev) => prev + 1);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [loading, hasMore, id]);
+
   return (
     <div>
-      {loading ? (
+      {loading && page === 1 ? (
         <Loading />
       ) : (
         <Container>
+          {/* PRODUCT DETAIL */}
           {!!id && productData && _.isEmpty(allProducts) ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <div className="flex flex-start">
@@ -70,9 +103,10 @@ const Product = () => {
                       src={item}
                       alt="img"
                       key={index}
-                      className={`w-24 cursor-pointer opacity-80 hover:opacity-100 duration-300 ${imgUrl === item &&
+                      className={`w-24 cursor-pointer opacity-80 hover:opacity-100 duration-300 ${
+                        imgUrl === item &&
                         "border border-gray-500 rounded-sm opacity-100"
-                        }`}
+                      }`}
                       onClick={() => setImgUrl(item)}
                     />
                   ))}
@@ -92,18 +126,22 @@ const Product = () => {
                   <div className="flex items-center gap-1">
                     <div className="text-base text-lightText flex items-center">
                       <span>{productData?.rating}</span>
-                      <TiStarFullOutline  color="#FFD700"/>
+                      <TiStarFullOutline color="#FFD700" />
                     </div>
-                    <p className="text-base font-semibold">{`(${productData?.reviews} reviews)`}</p>
+                    <p className="text-base font-semibold">
+                      ({productData?.reviews} reviews)
+                    </p>
                   </div>
                 </div>
+
                 <p className="flex items-center">
                   <FaRegEye className="mr-1" />{" "}
                   <span className="font-semibold mr-1">
                     {productData?.reviews}
-                  </span>{" "}
+                  </span>
                   peoples are viewing this right now
                 </p>
+
                 <p>
                   You are saving{" "}
                   <span className="text-base font-semibold text-green-500">
@@ -116,6 +154,7 @@ const Product = () => {
                   </span>{" "}
                   upon purchase
                 </p>
+
                 <div>
                   {color && (
                     <p>
@@ -128,14 +167,16 @@ const Product = () => {
                       </span>
                     </p>
                   )}
+
                   <div className="flex items-center gap-x-3">
                     {productData?.colors.map((item) => (
                       <div
                         key={item}
-                        className={`${item === color
+                        className={`${
+                          item === color
                             ? "border border-black p-1 rounded-full"
                             : "border-transparent"
-                          }`}
+                        }`}
                       >
                         <div
                           className="w-10 h-10 rounded-full cursor-pointer"
@@ -145,6 +186,7 @@ const Product = () => {
                       </div>
                     ))}
                   </div>
+
                   {color && (
                     <button
                       onClick={() => setColor("")}
@@ -154,33 +196,46 @@ const Product = () => {
                     </button>
                   )}
                 </div>
+
                 <p>
-                  Brand:{" "}
-                  <span className="font-medium">{productData?.brand}</span>
+                  Brand: <span className="font-medium">{productData?.brand}</span>
                 </p>
                 <p>
                   Category:{" "}
                   <span className="font-medium">{productData?.category}</span>
                 </p>
+
                 <AddToCartBtn
                   product={productData}
                   className="bg-black/80 py-3 text-base text-gray-200 hover:scale-100 hover:text-white duration-200"
                 />
-               
               </div>
             </div>
           ) : (
+            /* PRODUCT LIST + INFINITE SCROLL */
             <div className="flex items-start gap-10">
               <CategoryFilters id={id} />
+
               <div>
                 <p className="text-4xl font-semibold mb-5 text-center">
                   Products Collection
                 </p>
+
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                   {allProducts?.map((item: ProductProps) => (
                     <ProductCard item={item} key={item?._id} />
                   ))}
                 </div>
+
+                {loading && (
+                  <p className="text-center py-4">Loading more...</p>
+                )}
+
+                {!hasMore && (
+                  <p className="text-center py-4 text-gray-500">
+                    No more products
+                  </p>
+                )}
               </div>
             </div>
           )}
