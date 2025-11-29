@@ -44,12 +44,31 @@ function Checkout() {
           </div>
 
         </div>
-        <Link
-          to="/odeme"
-          className="block mt-6 w-full text-center bg-blue-600 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-blue-700 active:bg-blue-800 transition-colors"
-        >
-          Alışverişi Tamamla
-        </Link>
+        <div className="relative group w-full mt-6">
+          <Link
+            to={currentUser ? "/odeme" : "#"}
+            className={`block w-full text-center font-semibold py-3 rounded-lg shadow-md transition-colors 
+      ${currentUser
+                ? "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800"
+                : "bg-gray-400 text-gray-700 cursor-not-allowed"
+              }`}
+            onClick={(e) => {
+              if (!currentUser) e.preventDefault();
+            }}
+          >
+            Alışverişi Tamamla
+          </Link>
+
+          {/* Tooltip */}
+          {!currentUser && (
+            <div className="absolute left-1/2 -translate-x-1/2 -top-10 
+      opacity-0 group-hover:opacity-100 transition 
+      bg-black text-white text-sm px-3 py-2 rounded-md shadow-lg whitespace-nowrap">
+              Öncelikle giriş yapmalısınız
+            </div>
+          )}
+        </div>
+
       </div>
     </div>
 

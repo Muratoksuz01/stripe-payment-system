@@ -7,10 +7,17 @@
 
 
 
-                cuma 28
-- hugging face Aı ,destek sayfsı bir sekilde yap 
 
+/*
+            devam edersen 
+- orderda kargo ucreti varsa bunu listeleme asamasında gostermen lazım bunun icinde orders tablosunda kargo ucretinide dahil etmen gerek 
+- address ekleyebilmeli ve bu odeme asamasında gosterilmeli kayıtlı adreslerim diye 
+- kart girerken isim soyisim almıyoruz bence almalıyız
+- Aı kısmında fatura linki gostebilmeli 
+- inputlar icin zod kullandık istesek bunları bir component icine almalıyız 
+- AıComponents te mesaj yazarken "as const" kullanıyoruz bu olmamalı 
 
+*/
 
 
 
@@ -64,5 +71,9 @@
 - autoFac                                                                                                   nodejs de kullanılmıyor 
 - register da avatar sil bas harfleri koy                                                                   tamam 
 - tum productlar gelmesin asagı indirdikce gelesin veriler                                                  tamam
+                cuma 28
+- hugging face Aı ,destek sayfsı bir sekilde yap                                                             backendi tamam
+                cumartesi 29
+-- frontend bitti                                                                                               tamam
 
 

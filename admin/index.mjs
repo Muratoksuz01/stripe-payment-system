@@ -6,6 +6,14 @@ import { fileURLToPath } from "url";
 import path from "path";
 import { readdirSync } from "fs";
 const app = express();
+/**
+ * 
+ * uluslararası seritiifka 44500tl 
+ * aynısı 36000 
+ * zehra  gaiba eşi 
+ * 
+ * 
+ */
 const limiter = rateLimit({
   windowMs: 5 * 60 * 1000, // 15 dk max 10 istek izin ver 
   max: 100,

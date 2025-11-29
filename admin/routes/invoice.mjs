@@ -76,7 +76,7 @@ router.post("/create-invoice", async (req, res) => {
 
 router.get("/getInvoices", async (req, res) => {
   try {
-    const { email, paymentId } = req.query;
+    const { email } = req.query;
 
     const userDoc = await db.collection("orders").doc(email).get();
 
@@ -114,6 +114,21 @@ router.get("/getInvoice", async (req, res) => {
   }
 
   // PDF dosyasını gönder
+  res.sendFile(invoicePath);
+});
+router.get("/invoices/:fileName", async (req, res) => {
+  const { fileName } = req.params;
+
+  if (!fileName) {
+    return res.status(400).json({ success: false, message: "Dosya adı eksik" });
+  }
+
+  const invoicePath = path.join(process.cwd(), "invoices", path.basename(fileName));
+
+  if (!fs.existsSync(invoicePath)) {
+    return res.status(404).json({ success: false, message: "Dosya bulunamadı" });
+  }
+
   res.sendFile(invoicePath);
 });
 
